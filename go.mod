@@ -34,5 +34,3 @@ require (
 	golang.org/x/sys v0.48.0 // indirect
 	golang.org/x/text v0.42.0 // indirect
 )
-
-// replace github.com/wailsapp/wails/v2 v2.17.1 => C:\Users\user\AppData\Local\Temp\cursor-sandbox-cache\b6f039621f11c62efad8b297c1c91c62\go-mod
