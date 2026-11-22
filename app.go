@@ -5,23 +5,27 @@ import (
 	"fmt"
 )
 
-// App struct
+type Config struct {
+	Name string
+}
+
 type App struct {
-	ctx context.Context
+	ctx  context.Context
+	name string
 }
 
-// NewApp creates a new App application struct
-func NewApp() *App {
-	return &App{}
+func NewApp(cfg Config) *App {
+	return &App{name: cfg.Name}
 }
 
-// startup is called when the app starts. The context is saved
-// so we can call the runtime methods
 func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 }
 
-// Greet returns a greeting for the given name
+func (a *App) Name() string {
+	return a.name
+}
+
 func (a *App) Greet(name string) string {
 	return fmt.Sprintf("Hello %s, It's show time!", name)
 }

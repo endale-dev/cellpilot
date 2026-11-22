@@ -23,7 +23,7 @@ func run() error {
 }
 
 func compose() *App {
-	return NewApp()
+	return NewApp(Config{Name: "CellPilot"})
 }
 
 func applicationOptions(app *App) *options.App {
