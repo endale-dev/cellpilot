@@ -1,8 +1,13 @@
 package main
 
 import (
+	"context"
+	"database/sql"
 	"embed"
+	"fmt"
 	"log"
+
+	"cellpilot/internal/repository/sqlite"
 
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
@@ -18,8 +23,31 @@ func main() {
 	}
 }
 
-func run() error {
+func run() (err error) {
+	ctx := context.Background()
+	db, err := openDatabase(ctx)
+	if err != nil {
+		return err
+	}
+	defer func() {
+		if cerr := db.Close(); cerr != nil && err == nil {
+			err = fmt.Errorf("close database: %w", cerr)
+		}
+	}()
+
+	if err = sqlite.Migrate(ctx, db); err != nil {
+		return err
+	}
+
 	return wails.Run(applicationOptions(compose()))
+}
+
+func openDatabase(ctx context.Context) (*sql.DB, error) {
+	path, err := sqlite.DefaultPath()
+	if err != nil {
+		return nil, err
+	}
+	return sqlite.Open(ctx, path)
 }
 
 func compose() *App {
