@@ -1,9 +1,6 @@
 package main
 
-import (
-	"context"
-	"fmt"
-)
+import "context"
 
 type Config struct {
 	Name string
@@ -24,8 +21,4 @@ func (a *App) startup(ctx context.Context) {
 
 func (a *App) Name() string {
 	return a.name
-}
-
-func (a *App) Greet(name string) string {
-	return fmt.Sprintf("Hello %s, It's show time!", name)
 }

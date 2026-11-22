@@ -28,13 +28,15 @@ func compose() *App {
 
 func applicationOptions(app *App) *options.App {
 	return &options.App{
-		Title:  "cellpilot",
-		Width:  1024,
-		Height: 768,
+		Title:     app.Name(),
+		Width:     1280,
+		Height:    800,
+		MinWidth:  960,
+		MinHeight: 640,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},
-		BackgroundColour: &options.RGBA{R: 27, G: 38, B: 54, A: 1},
+		BackgroundColour: &options.RGBA{R: 244, G: 245, B: 247, A: 255},
 		OnStartup:        app.startup,
 		Bind: []interface{}{
 			app,

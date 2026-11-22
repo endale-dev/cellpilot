@@ -1,22 +1,20 @@
 <script lang="ts" setup>
-import HelloWorld from './components/HelloWorld.vue'
+import { onMounted, ref } from 'vue'
+import { Name } from '../wailsjs/go/main/App'
+
+const appName = ref('CellPilot')
+
+onMounted(async () => {
+  const name = await Name()
+  if (name) {
+    appName.value = name
+  }
+})
 </script>
 
 <template>
-  <img id="logo" alt="Wails logo" src="./assets/images/logo-universal.png"/>
-  <HelloWorld/>
+  <main class="window">
+    <h1>{{ appName }}</h1>
+    <p>Ready</p>
+  </main>
 </template>
-
-<style>
-#logo {
-  display: block;
-  width: 50%;
-  height: 50%;
-  margin: auto;
-  padding: 10% 0 0;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-origin: content-box;
-}
-</style>
